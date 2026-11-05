@@ -1,0 +1,14 @@
+{
+  "buildCommand": "python3 scripts/build_frontend.py",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/index.py": {
+      "includeFiles": ["system_prompt.md"]
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index" },
+    { "source": "/dashboard_prof", "destination": "/prof_dashboard.html" },
+    { "source": "/qcm", "destination": "/create_QCM.html" }
+  ]
+}

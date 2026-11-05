@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Monod Quiz - Espace Professeur</title>
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/static/css/prof_dashboard.css">
+</head>
+<body>
+  <div class="header">
+    <div class="logo-wrap">
+      <img src="/static/logo.svg" alt="Logo Collège Théodore Monod">
+    </div>
+    <div class="title-block">
+      <h1>Monod Quiz</h1>
+      <p>Dashboard Professeur</p>
+    </div>
+    <a href="/api/logout" class="logout-btn">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="btn-text">Déconnexion</span>
+    </a>
+  </div>
+
+  
+  <div class="actions-row">
+    <div class="action-card">
+      <div class="action-icon"><i class="fa-solid fa-file-lines"></i></div>
+      <div class="text-group">
+        <h2>Créer un nouveau QCM</h2>
+        <p>Concevez votre propre questionnaire en quelques clics !</p>
+      </div>
+      <a href="/qcm">
+        <button class="btn-action btn-create">Créer un QCM ⟶</button>
+      </a>
+    </div>
+    <div class="action-card">
+      <div class="action-icon"><i class="fa-solid fa-people-group"></i></div>
+      <div class="text-group">
+        <h2>Lancer une classe</h2>
+        <p>Démarrer une session et inviter vos élèves à rejoindre</p>
+      </div>
+      <button class="btn-action btn-launch" onclick="openLaunchModal()">Lancer une classe ⟶</button>
+    </div>
+  </div>
+
+  
+  <div class="toolbar-section">
+    <div class="toolbar-top">
+      <h2>Tous les QCM disponibles</h2>
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" placeholder="Rechercher un QCM" class="search" id="searchInput">
+      </div>
+      <select id="avaible-theme">
+        <option value="all">Tous les thèmes</option>
+      </select>
+      <select id="avaible-class">
+        <option value="all">Toutes les classes</option>
+        <option value="6éme">6éme</option>
+        <option value="5ème">5ème</option>
+        <option value="4ème">4ème</option>
+        <option value="3ème">3ème</option>
+        <option value="2nde">2nde</option>
+      </select>
+    </div>
+
+    <div class="tabs-row">
+      <button class="tab-btn active" data-tab="public">
+        <i class="fa-solid fa-globe" style="margin-right:5px;font-size:12px;"></i>QCM publics
+      </button>
+      <button class="tab-btn" data-tab="private">
+        <i class="fa-solid fa-lock" style="margin-right:5px;font-size:12px;"></i>QCM privés
+      </button>
+    </div>
+
+    <div id="qcmContainer">
+      <div class="empty-state">
+        <div class="empty-icon-wrap">
+          <i class="fa-regular fa-folder-open"></i>
+        </div>
+        <h3>Aucun QCM n'a été créé</h3>
+        <p>Commencez par créer votre premier questionnaire pour le voir apparaître ici.</p>
+        <a href="/qcm" class="btn-empty">
+          <i class="fa-solid fa-plus"></i>
+          Créer mon premier QCM
+        </a>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="modal-overlay" id="roomEmptyNotice" onclick="if (event.target === this) closeRoomEmptyNotice()">
+    <div class="modal-box notice-modal">
+      <div class="notice-modal-icon"><i class="fa-solid fa-users-slash"></i></div>
+      <h2>Session fermée</h2>
+      <p>Tous les élèves ont quitté la salle. La session a été fermée automatiquement car il n'y avait plus aucun joueur connecté.</p>
+      <button class="notice-modal-btn" type="button" onclick="closeRoomEmptyNotice()">Compris</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="launchModalOverlay" onclick="closeOnOverlay(event)">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h2>Choisir un QCM</h2>
+          <p>Sélectionnez le QCM que vous souhaitez utiliser</p>
+        </div>
+        <button class="modal-close" onclick="closeLaunchModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-filters">
+        <div class="modal-search-wrap">
+          <i class="fa-solid fa-magnifying-glass modal-search-icon"></i>
+          <input type="text" class="modal-search" id="modalSearchInput" placeholder="Rechercher un QCM">
+        </div>
+        <div class="modal-selects">
+          <select id="modalThemeSelect">
+            <option value="all">Tous les thèmes</option>
+          </select>
+          <select id="modalClassSelect">
+            <option value="all">Toutes les classes</option>
+            <option value="6éme">6éme</option>
+            <option value="5ème">5ème</option>
+            <option value="4ème">4ème</option>
+            <option value="3ème">3ème</option>
+            <option value="2nde">2nde</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="modal-tab-btn active" data-tab="public">
+          <i class="fa-solid fa-globe" style="margin-right:5px;font-size:11px;"></i>QCM publics
+        </button>
+        <button class="modal-tab-btn" data-tab="private">
+          <i class="fa-solid fa-lock" style="margin-right:5px;font-size:11px;"></i>QCM privés
+        </button>
+      </div>
+
+      <div class="modal-list" id="modalList"></div>
+    </div>
+  </div>
+
+  <div class="server-wait-overlay" id="serverWaitOverlay" aria-live="polite" hidden>
+    <div class="server-wait-dialog" role="status">
+      <span class="server-wait-spinner" aria-hidden="true"></span>
+      <h2>Préparation du serveur de classe</h2>
+      <p id="serverWaitMessage">Connexion au serveur…</p>
+    </div>
+  </div>
+
+  <script src="/static/js/app_config.js"></script>
+  <script src="/static/js/prof_dashboard.js"></script>
+
+</body>
+</html>

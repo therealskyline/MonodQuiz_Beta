@@ -1,0 +1,219 @@
+{
+  "qcm_name": "test site web",
+  "auteur": "silyan",
+  "theme": "math",
+  "visibilite": true,
+  "level": "3ème",
+  "questions": [
+    {
+      "id": 1,
+      "text": "La fonction exponentielle f(x) = exp(x) est strictement croissante sur R",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Vrai",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "Faux",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Soit f une fonction dérivable sur un intervalle I ; si f'(x) est positive, alors f est croissante sur I",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Vrai",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "Faux",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "La dérivée de la fonction f(x) = ln(x) est f'(x) = 1/x",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Vrai",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "Faux",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "L'équation exp(x) = 0 possède une solution réelle unique",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Vrai",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Faux",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Une suite géométrique de premier terme u0 = 2 et de raison q = -3 est monotone",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Vrai",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "Faux",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Le plan est muni d'un repère orthonormé ; quelle est la limite de (ln x) / x quand x tend vers +infini ?",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "0",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "1",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "+infini",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "e",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Parmi ces propositions, lesquelles correspondent à des propriétés de la fonction logarithme népérien ?",
+      "multiple": true,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "ln(ab) = ln(a) + ln(b)",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "ln(a^n) = n * ln(a)",
+          "correct": true
+        },
+        {
+          "letter": "C",
+          "text": "ln(a + b) = ln(a) + ln(b)",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "ln(1) = 0",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Soit f(x) = x^3 - 3x + 1 ; quelle est la valeur de f'(x) ?",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "3x^2 - 3",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "x^2 - 3",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "3x^2 + 1",
+          "correct": false
+        },
+        {
+          "letter": "D",
+          "text": "2x^2 - 3",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Parmi les nombres suivants, lequel est égal à exp(ln 5) ?",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "ln 5",
+          "correct": false
+        },
+        {
+          "letter": "B",
+          "text": "e^5",
+          "correct": false
+        },
+        {
+          "letter": "C",
+          "text": "5",
+          "correct": true
+        },
+        {
+          "letter": "D",
+          "text": "1",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "La suite définie par u(n+1) = u(n) + 3 est une suite arithmétique",
+      "multiple": false,
+      "answers": [
+        {
+          "letter": "A",
+          "text": "Vrai",
+          "correct": true
+        },
+        {
+          "letter": "B",
+          "text": "Faux",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

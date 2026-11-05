@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: monodquiz-live
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn render_app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: HF_REPO_ID
+        sync: false
+      - key: HF_REPO_TYPE
+        value: dataset
+      - key: HF_TOKEN
+        sync: false
+      - key: QCM_PROF_KEY
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: FRONTEND_ORIGINS
+        sync: false

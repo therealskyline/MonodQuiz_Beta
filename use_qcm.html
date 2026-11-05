@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Monod Quiz - QCM</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/use_qcm.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-wrap">
+            <img src="/static/logo.svg" alt="Logo Monod Quiz" onerror="this.style.display='none'">
+        </div>
+        <p class="brand-label">Monod Quiz</p>
+        <a href="/eleve_dashboard.html" class="exit-btn">
+            <i class="fa-solid fa-arrow-right-from-bracket icon-desktop"></i>
+            <i class="fa-solid fa-arrow-left icon-mobile"></i>
+            <span class="btn-text">Quitter</span>
+        </a>
+    </header>
+
+    <div class="multiple-question-badge" id="multipleQuestionBadge">
+        <i class="fa-solid fa-list-check"></i>
+        <span>Question à choix multiples</span>
+    </div>
+    <div class="progress-text" id="progressText">Question 1 / 10</div>
+
+    <div class="content-area">
+        <div id="qcmContainer">
+            <div class="loading">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 16px;"></i>
+                <p>Chargement du QCM...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/use_qcm.js"></script>
+</body>
+</html>

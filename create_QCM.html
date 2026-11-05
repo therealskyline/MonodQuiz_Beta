@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un QCM</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="/static/css/create_QCM.css">
+</head>
+<body>
+    
+    <div class="header">
+        <div class="logo-wrap">
+            <img src="/static/logo.svg" alt="Logo Collège Théodore Monod">
+        </div>
+        <div class="title-block">
+            <h1>Monod Quiz</h1>
+            <p>Créer un QCM</p>
+        </div>
+        <a href="/dashboard_prof" class="return-btn">
+            <i class="fa-solid fa-arrow-left"></i> <span class="btn-text">Retour à votre espace</span>
+        </a>
+    </div>
+
+    <div class="content">
+
+        
+        <div class="panel panel-left">
+
+            
+            <div class="import-tabs">
+                <button class="import-tab" id="tab-manual" onclick="switchImportTab('manual')">
+                    <i class="ti ti-file-text"></i> Manuel
+                </button>
+                <button class="import-tab active" id="tab-ai" onclick="switchImportTab('ai')">
+                    <i class="ti ti-sparkles"></i> Avec l'IA
+                </button>
+            </div>
+
+            
+            <div class="import-pane" id="pane-manual">
+                <div class="edition-title">Édition des questions</div>
+                <div id="questions-list"></div>
+                <button class="btn-add-question" onclick="addQuestion()">
+                    <i class="ti ti-plus"></i> Ajouter une question
+                </button>
+            </div>
+
+            
+            <div class="import-pane active" id="pane-ai">
+                <div class="step-row">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Décrivez votre QCM</h3>
+                        <p>Expliquez le sujet, le niveau, le nombre de questions souhaitées...</p>
+                    </div>
+                </div>
+
+                <textarea class="ai-prompt" id="ai-prompt-input" maxlength="1000" placeholder="Ex : Un QCM de 10 questions sur les fractions, niveau 5ème, avec 4 choix par question."></textarea>
+                <div class="char-counter" id="ai-prompt-counter">0 / 1000</div>
+
+                <div class="step-row" style="margin-top: 10px;">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Ajoutez vos fichiers <span class="step-optional">(optionnel)</span></h3>
+                        <p>L'IA s'appuiera sur vos documents pour générer le QCM.</p>
+                    </div>
+                </div>
+
+                <div class="ai-dropzone" id="ai-dropzone" onclick="document.getElementById('ai-file-input').click()">
+                    <div class="dz-icon"><i class="ti ti-cloud-upload"></i></div>
+                    <div class="dz-title">Glissez vos fichiers ici ou cliquez pour parcourir</div>
+                    <div class="dz-sub">PDF, image, texte • Max 40 Mo par fichier</div>
+                    <input type="file" id="ai-file-input" multiple accept=".pdf,.txt,.doc,.docx,image/*" style="display:none">
+                </div>
+
+                <div class="ai-files" id="ai-files-list"></div>
+
+                <button class="ai-generate-btn" id="ai-generate-btn" onclick="generateWithAI()">
+                    <i class="ti ti-sparkles"></i> Générer le QCM avec l'IA
+                </button>
+            </div>
+
+        </div>
+
+        
+        <div class="panel panel-right is-empty">
+            <div class="preview-title-row">
+                <i class="ti ti-eye"></i>
+                <div class="preview-title">Aperçu du QCM</div>
+            </div>
+            <div class="preview-sub">Voici un aperçu de votre QCM. Vous pourrez le modifier après génération.</div>
+
+            <div class="preview-box" id="preview-box">
+                <div class="preview-empty" style="padding: 40px 20px;">
+                    <div class="relative m-1" style="transform: scale(1.5); transform-origin: center; margin-bottom: 50px;">
+                        <div class="w-40 h-32 rounded-3xl bg-gradient-to-br from-violet-50 via-white to-violet-100 shadow-xl border border-violet-100 p-5">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-4 h-4 rounded-md bg-violet-500"></div>
+                                <div class="space-y-1">
+                                    <div class="w-14 h-2 rounded-full bg-violet-300"></div>
+                                    <div class="w-10 h-2 rounded-full bg-violet-200"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-4 h-4 rounded-full bg-violet-500"></div>
+                                <div class="space-y-1">
+                                    <div class="w-24 h-2 rounded-full bg-violet-300"></div>
+                                    <div class="w-18 h-2 rounded-full bg-violet-200"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 mb-2 opacity-70">
+                                <div class="w-3 h-3 rounded-full border-2 border-violet-300"></div>
+                                <div class="w-18 h-2 rounded-full bg-violet-200"></div>
+                            </div>
+                            <div class="flex items-center gap-3 opacity-50">
+                                <div class="w-3 h-3 rounded-full border-2 border-violet-300"></div>
+                                <div class="w-14 h-2 rounded-full bg-violet-200"></div>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 rounded-3xl blur-2xl bg-violet-300/20 -z-10"></div>
+                        <div class="absolute -bottom-3 -right-3 w-16 h-16 rounded-full bg-white border border-violet-100 shadow-xl flex items-center justify-center">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-br from-violet-200 to-violet-100 opacity-70"></div>
+                            <span class="relative text-violet-500 font-bold text-4xl">?</span>
+                        </div>
+                    </div>
+                    <h4 style="position: relative; z-index: 10; margin-top: 1px; opacity: 0.6;">Aucun QCM généré pour le moment</h4>
+                </div>
+            </div>
+
+            <div class="preview-controls">
+                <button id="prev-question-btn" onclick="prevQuestion()" disabled><i class="ti ti-arrow-left"></i> Retour</button>
+                <button id="next-question-btn" onclick="nextQuestion()" disabled>Suivant <i class="ti ti-arrow-right"></i></button>
+            </div>
+
+            <div class="info-banner">
+                <i class="ti ti-info-circle"></i>
+                <span>Vous pourrez modifier toutes les questions, les choix et les réponses après génération.</span>
+            </div>
+
+            <button class="save-btn-outline" id="save-btn" onclick="openSaveModal()">
+                <i class="ti ti-device-floppy" style="font-size:17px;"></i>
+                Sauvegarder en brouillon
+            </button>
+
+            <div class="save-note">
+                <i class="ti ti-lock" style="font-size:13px;"></i>
+                Votre QCM sera enregistré et disponible depuis votre espace.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="save-modal" id="save-modal">
+        <div class="save-modal-backdrop" onclick="closeSaveModal()"></div>
+        <div class="save-modal-content">
+            <div class="save-modal-header">
+                <h3>Enregistrer le QCM</h3>
+                <button class="modal-close" type="button" onclick="closeSaveModal()">×</button>
+            </div>
+            <div class="save-modal-body">
+                <label>
+                    Nom du QCM
+                    <input id="save-qcm-name" type="text" placeholder="Ex : Quiz Multiplications 2024" />
+                </label>
+                <label>
+                    Nom de l'auteur
+                    <input id="save-author" type="text" placeholder="Ex : Mme Dupont" />
+                </label>
+                <label>
+                    Thème
+                    <input id="save-theme" type="text" placeholder="Ex : Multiplications" />
+                </label>
+                <label>
+                    Visibilité
+                    <select id="save-visibility">
+                        <option value="public">Public</option>
+                        <option value="private">Privé</option>
+                    </select>
+                </label>
+                <label>
+                    Niveau
+                    <select id="save-level">
+                        <option value="6éme">6éme</option>
+                        <option value="5ème">5ème</option>
+                        <option value="4ème">4ème</option>
+                        <option value="3ème">3ème</option>
+                        <option value="2nde">2nde</option>
+                    </select>
+                </label>
+            </div>
+            <div class="save-modal-actions">
+                <button class="btn-secondary" type="button" onclick="closeSaveModal()">Annuler</button>
+                <button class="save-btn" type="button" onclick="confirmSave()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-editor-modal" id="text-editor-modal" onclick="closeTextEditor(event)">
+        <div class="text-editor-content">
+            <div class="text-editor-header">
+                <h3 id="text-editor-title">Modifier le texte</h3>
+                <button class="modal-close" type="button" onclick="closeTextEditor()">×</button>
+            </div>
+            <textarea id="text-editor-input" rows="7"></textarea>
+            <div class="text-editor-actions">
+                <button class="btn-secondary" type="button" onclick="closeTextEditor()">Annuler</button>
+                <button class="save-btn" type="button" onclick="saveTextEditor()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="ti ti-check"></i> QCM sauvegardé avec succès !
+    </div>
+
+<script src="/static/js/create_QCM.js"></script>
+
+</body>
+</html>

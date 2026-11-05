@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monod Quiz</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+
+<div class="blob blob-blue" id="blobBlue"></div>
+<div class="blob blob-purple" id="blobPurple"></div>
+<div class="blob blob-center" id="blobCenter"></div>
+<div class="dot dot-pink" id="dotPink"></div>
+<div class="dot dot-yellow" id="dotYellow"></div>
+<div class="dot dot-purple" id="dotPurple"></div>
+<div class="plus plus-left" id="plusLeft">+</div>
+<div class="plus plus-right" id="plusRight">+</div>
+
+<header class="header" id="header">
+  <div class="logo-wrap">
+    <img src="/static/logo.svg" alt="Logo Collège Théodore Monod" onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='flex'">
+    <div class="logo-fallback">M</div>
+  </div>
+  <div class="title-block">
+    <h1>Monod Quiz</h1>
+    <p>Choisis ton thème <span class="subtitle-extra">et joue !</span></p>
+  </div>
+</header>
+
+<main class="arena">
+  <div class="cards-scene">
+    <div class="theme-card card-tl" id="cardTL">
+      <div class="theme-icon algebra-icon"><i class="fa-solid fa-square-root-variable"></i></div>
+      <div class="theme-copy">
+        <h2>Algèbre</h2>
+        <span class="theme-line"></span>
+        <p>Équations, expressions,<br> inéquations et calcul littéral.</p>
+      </div>
+    </div>
+    <div class="theme-card card-tr" id="cardTR">
+      <div class="theme-icon geometry-icon"><i class="fa-solid fa-shapes"></i></div>
+      <div class="theme-copy">
+        <h2>Géométrie</h2>
+        <span class="theme-line"></span>
+        <p>Figures, angles, théorèmes<br> et constructions géométriques.</p>
+      </div>
+    </div>
+    <div class="theme-card card-bl" id="cardBL">
+      <div class="theme-icon statistics-icon"><i class="fa-solid fa-chart-pie"></i></div>
+      <div class="theme-copy">
+        <h2>Statistiques</h2>
+        <span class="theme-line"></span>
+        <p>Tableaux, graphiques,<br> moyennes et pourcentages.</p>
+      </div>
+    </div>
+    <div class="theme-card card-br" id="cardBR">
+      <div class="theme-icon functions-icon"><i class="fa-solid fa-chart-line"></i></div>
+      <div class="theme-copy">
+        <h2>Fonctions</h2>
+        <span class="theme-line"></span>
+        <p>Graphiques, variations,<br> proportionnalité et relations.</p>
+      </div>
+    </div>
+
+    <div class="halo-btn" id="haloBtn">
+      <div class="play-btn" id="playBtn" onclick="ouvrirModal()">
+        <div class="play-inner">
+          <div class="play-icon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bottom-hint" id="bottomHint">Appuyer pour commencer</footer>
+
+<div class="modal-overlay" id="overlay" onclick="fermerSiDehors(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script src="/static/js/login.js"></script>
+</body>
+</html>

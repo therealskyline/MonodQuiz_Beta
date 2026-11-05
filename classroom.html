@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Monod Quiz - Salle de classe</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/classroom.css">
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo-wrap"><img src="/static/logo.svg" alt="Logo Collège Théodore Monod"></div>
+    <div class="title-block"><h1>Monod Quiz</h1></div>
+    <div class="top-right-controls">
+      <a href="javascript:void(0)" onclick="handleLogout()" class="logout-btn">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="btn-text">Quitter</span>
+      </a>
+    </div>
+  </div>
+
+  
+  <div class="prof-mode" id="profMode">
+    <p class="section-label">Classe en attente</p>
+    <main class="content-grid">
+      <section class="panel-r"><div class="code-panel"><p class="code-label">Code de connexion</p><div class="code-value" id="codeValueProf"></div></div></section>
+      <section class="panel-l"><div class="connected-title" id="connectedTitle">Élèves connectés : 0</div><div class="student-list" id="studentList"><p class="student-empty">En attente d'élèves...</p></div></section>
+    </main>
+    <div class="start-btn-wrap"><button class="start-btn" id="startBtn"><i class="fa-solid fa-play"></i> Démarrer le quiz</button></div>
+  </div>
+
+  
+  <div class="eleve-mode" id="eleveMode">
+    <div class="eleve-container">
+      <p class="room-code-label">Salle : <span id="roomCodeDisplay"></span></p>
+      <h1 class="eleve-title">Bienvenue <span id="studentName"></span> <span class="emoji" id="studentEmoji">👋</span></h1>
+      <div class="avatar-circle"><i class="fas fa-users"></i></div>
+      <p class="status-message" id="statusMessage">En attente du professeur</p>
+      <div class="badges-container"><div class="badge active" data-badge="0"></div><div class="badge" data-badge="1"></div><div class="badge" data-badge="2"></div></div>
+    </div>
+  </div>
+
+  
+  <div class="quiz-view" id="quizView">
+    <div id="questionPhase">
+      <div class="multiple-question-badge" id="multipleQuestionBadge"><i class="fa-solid fa-list-check"></i><span>Question à choix multiples</span></div>
+      <p class="progress-text" id="quizProgressText">Question 1/10</p>
+      <div class="question-title" id="questionTitle"></div>
+      <div class="answers-grid" id="answersGrid"></div>
+      <div class="timer-row">
+        <div class="timer-block"><i class="fa-regular fa-clock"></i><span id="timerText">30 sec</span><div class="timer-bar-track"><div class="timer-bar-fill" id="timerBarFill"></div></div></div>
+        <div class="responses-count prof-only" id="responsesCount">Réponses reçues : 0/0</div>
+      </div>
+      <button class="validate-btn multi-answer-submit" id="multiAnswerSubmit" style="display:none;" disabled><i class="fa-solid fa-check"></i> Valider mes réponses</button>
+      <button class="validate-btn prof-only" id="validateBtn"><i class="fa-solid fa-check"></i> Valider la question</button>
+    </div>
+    <div id="revealPhase">
+      <p class="progress-text" id="revealProgressText">Question 1/10</p>
+      <div class="reveal-banner" id="revealBanner"></div>
+      <div class="reveal-bars" id="revealBars"></div>
+      <p class="reveal-next" id="revealNext"></p>
+    </div>
+    <div id="leaderboardPhase">
+      <p class="progress-text" id="leaderboardProgressText">Question 1/10</p>
+      <p class="leaderboard-title"><i class="fa-solid fa-trophy"></i> Classement</p>
+      <div class="leaderboard-list" id="leaderboardList"></div>
+      <p class="reveal-next" id="leaderboardNext"></p>
+    </div>
+    <div id="finishedPhase"></div>
+  </div>
+
+  
+  <div id="customModal" class="custom-modal-overlay">
+    <div class="custom-modal">
+      <p id="customModalMessage"></p>
+      <div class="custom-modal-actions">
+        <button id="customModalCancel" class="custom-modal-btn cancel">Annuler</button>
+        <button id="customModalConfirm" class="custom-modal-btn confirm">Confirmer</button>
+        <button id="customModalOk" class="custom-modal-btn confirm" style="display:none;">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app_config.js"></script>
+  <script src="/static/js/classroom.js"></script>
+</body>
+</html>

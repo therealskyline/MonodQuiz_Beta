@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+python-dotenv
+google-genai
+python-docx
+python-multipart
+huggingface_hub

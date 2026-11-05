@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Monod Quiz - Espace élève</title>
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/static/css/eleve_dashboard.css">
+</head>
+<body>
+  <div class="header">
+    <div class="logo-wrap">
+      <img src="/static/logo.svg" alt="Logo Collège Théodore Monod">
+    </div>
+    <div class="title-block">
+      <h1>Monod Quiz</h1>
+      <p>Espace élève</p>
+    </div>
+    <a href="/api/logout" class="logout-btn">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="btn-text">Déconnexion</span>
+    </a>
+  </div>
+
+  <div class="actions-row">
+    <div class="action-card">
+      <div class="text-group">
+        <h2>Rejoindre une classe</h2>
+        <p>Entrez le code de votre professeur pour rejoindre sa session en cours.</p>
+      </div>
+      <div class="code-group">
+        <label>Code de la classe</label>
+        <div class="code-inputs">
+          <input class="code-input" maxlength="1" id="c1">
+          <input class="code-input" maxlength="1" id="c2">
+          <input class="code-input" maxlength="1" id="c3">
+          <input class="code-input" maxlength="1" id="c4">
+        </div>
+      </div>
+      <button class="btn-join" onclick="rejoindre()">
+        Rejoindre <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="toolbar-section">
+    <div class="toolbar-top">
+      <h2>Tous les QCM disponibles</h2>
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" placeholder="Rechercher un QCM" class="search" id="searchInput">
+      </div>
+      <select id="avaible-theme">
+        <option value="all">Tous les thèmes</option>
+      </select>
+      <select id="avaible-class">
+        <option value="all">Toutes les classes</option>
+        <option value="6éme">6éme</option>
+        <option value="5ème">5ème</option>
+        <option value="4ème">4ème</option>
+        <option value="3ème">3ème</option>
+        <option value="2nde">2nde</option>
+      </select>
+    </div>
+
+    <div id="qcmContainer">
+      <div class="empty-state">
+        <div class="empty-icon-wrap">
+          <i class="fa-regular fa-folder-open"></i>
+        </div>
+        <h3>Aucun QCM disponible</h3>
+      </div>
+    </div>
+  </div>
+  
+  <button class="floating-join-btn" type="button" onclick="openJoinModal()">
+    <i class="fa-solid fa-user-plus"></i> Rejoindre une classe
+  </button>
+
+  
+  <div class="modal-overlay" id="joinModalOverlay" onclick="if(event.target === this) closeJoinModal()">
+    <div class="join-modal">
+      <button type="button" class="join-modal-close" onclick="closeJoinModal()" aria-label="Fermer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h2>Rejoindre une classe</h2>
+      <label>Code de la classe</label>
+      <div class="code-inputs">
+        <input class="code-input modal-code-input" maxlength="1" id="mc1">
+        <input class="code-input modal-code-input" maxlength="1" id="mc2">
+        <input class="code-input modal-code-input" maxlength="1" id="mc3">
+        <input class="code-input modal-code-input" maxlength="1" id="mc4">
+      </div>
+      <button class="btn-join" onclick="rejoindreModal()">
+        Rejoindre <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <script src="/static/js/eleve_dashboard.js"></script>
+</body>
+</html>
